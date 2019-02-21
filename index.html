@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Calculate drawer front and cabinet height.">
+  <meta name="author" content="Dave Creith">
+  <title>Drawer Fronts</title>
+  <link type="text/css" href="assets/css/bootstrap.css" rel="stylesheet">
+  <!-- Favicon -->
+  <link href="assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Argon CSS -->
+  <link type="text/css" href="assets/css/argon.css?v=1.0.1" rel="stylesheet">
+  <!-- Docs CSS -->
+  <link type="text/css" href="assets/css/docs.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header-global">
+  </header>
+  <main>
+    <section class="section section-shaped section-sm">
+      <div class="shape shape-style-1 bg-gradient-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="container " id="core_page"
+                  data-Target="C1"
+                  data-Type="none"
+                  data-ToHeight="no"
+                  >
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-3">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-body">
+                <form role="form">
+                  <div class="row">
+                    <div class="col text-center">
+                      <label>Choose Method
+                        <button type="button" class="btn btn-sm btn-outline-primary ml-3 mb-1" data-toggle="modal" data-target="#howItWorks">?</button>
+                      </label>
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="methodDD" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Method
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a id="s_hambridge" onClick="showType('hambridge')" class="dropdown-item" href="#">Hambridge</a>
+                          <!-- <a id="s_hambridgeModified" onClick="showType('hambridgeModified')" class="dropdown-item" href="#">Modified Hambridge</a> -->
+                          <a id="s_geometric" onClick="showType('geometric')" class="dropdown-item" href="#">Geometric</a>
+                          <a id="s_phi" onClick="showType('phi')" class="dropdown-item" href="#">Fibonacci/Phi</a>
+                          <a id="s_arithmetic" onClick="showType('arithmetic')" class="dropdown-item" href="#">Arithmetic</a>
+                          <a id="s_manual" onClick="showType('manual')" class="dropdown-item" href="#">Manual</a>
+                          <a id="s_manualDiff" onClick="showType('manualDiff')" class="dropdown-item" href="#">Manual/Diff</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="hambridgeInput" class="row d-none mt-2">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Drawer Width</label>
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=""></i></span>
+                          </div>
+                          <input id="drawerwidth" value="32" class="form-control text-right" placeholder="width" type="text">
+                        </div>
+                        <small class="text-danger" id="help_drawerwidth"></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="hambridgeModifiedInput" class="row d-none">
+                    <div class="col">
+                      <div class="form-group">
+                      </div>
+                    </div>
+                  </div>
+                  <div id="geometricInput" class="row d-none mt-2">
+                    <div class="col">
+                      <div class="form-group">
+                        <label id="">Ratio</label>
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=""></i></span>
+                          </div>
+                          <input id="ratiodecrease" value=".8" class="form-control text-right" placeholder=".8" type="text">
+                        </div>
+                        <small class="text-danger" id="help_ratiodecrease"></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="phiInput" class="row d-none">
+                    <div class="col">
+                      <div class="form-group">
+                      </div>
+                    </div>
+                  </div>
+                  <div id="arithmeticInput" class="row d-none mt-2">
+                    <div class="col">
+                      <div class="form-group">
+                        <label id="">Step</label>
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=""></i></span>
+                          </div>
+                          <input id="stepdecrease" value="1" class="form-control text-right" placeholder="1.25" type="text">
+                        </div>
+                        <small class="text-danger" id="help_stepdecrease"></small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="manualInput" class="row d-none mt-2">
+                    <div class="col">
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">T:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m8'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">2:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m7'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">3:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m6'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">4:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m5'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">5:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m4'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">6:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m3'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">7:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m2'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">B:</span>
+                                <input class='form-control text-right' type='text' value='0' id='m1'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="manualDiffInput" class="row d-none mt-2">
+                    <div class="col">
+                      <!-- <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">B:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d1'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">D1:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d2'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">D2:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d3'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">D3:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d4'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">D4:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d5'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">D5:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d6'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">D6:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d7'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="" class="row">
+                        <div class="col-9">
+                          <div class="form-group">
+                            <div class="input-group mb-4">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">D7:</span>
+                                <input class='form-control text-right' type='text' value='0' id='d8'/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group mb-3">
+                        <label for="drawercount"># Of Drawers</label>
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=""></i></span>
+                          </div>
+                          <input id="drawercount" value="6" class="form-control text-right" placeholder="#" type="text">
+                        </div>
+                        <small class="text-danger" id="help_drawercount"></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="rail">Rail Width</label>
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=""></i></span>
+                          </div>
+                          <input id="rail" value=".75" class="form-control text-right" placeholder="inches" type="text">
+                        </div>
+                        <small class="text-danger" id="help_rail"></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="base">Bottom Drawer</label>
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=""></i></span>
+                          </div>
+                          <input id="base" value="8" class="form-control text-right" placeholder="bottom drawer" type="text">
+                        </div>
+                        <small class="text-danger" id="help_base"></small>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="cabinetheight">Cabinet Height</label>
+                        <div class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=""></i></span>
+                          </div>
+                          <input id="cabinetheight" value="48" class="form-control text-right" placeholder="cabinet height" type="text">
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div id="" class="col text-center">
+                      <button type="button" class="btn btn-sm btn-outline-primary mb-1" data-toggle="modal" data-target="#whatItIs">Calculations</button>
+                      <!-- <button id="toheight" onClick="calcToHeight()" type="button" class="btn btn-secondary my-4">Calc To Height</button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-9">
+              <div class="card bg-secondary shadow border-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="modal fade" id="howItWorks" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h6 class="modal-title" id="modal-title-default">Calculate Drawer Fronts</h6>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>How It Works</p>
+                              <ol style="font-size:0.9em;">
+                                <li>Enter basic info. (# of drawers, bottom drawer size, rail size)</li>
+                                <li>Select a method to calculate the drawer front vertical sizing.</li>
+                                <li>Enter info for method.</li>
+                                <li>Press appropriate 'Use' button to assign column.</li>
+                              </ol>
+                              <p>Press title button on column to recalculate</p>
+                              <p>Press trash button to clear column</p>
+                              <p></p>
+                              <p></p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="modal fade" id="whatItIs" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h6 class="modal-title" id="modal-title-default">Calculations</h6>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Hambridge</p>
+                              <p style="font-size:0.8em;">Calculate drawer height based on square root of width</p>
+                              <p>Geometric</p>
+                              <p style="font-size:0.8em;">Each drawer height calulated as a percentage of the previous drawer</p>
+                              <p>Fibonacci/Phi</p>
+                              <p style="font-size:0.8em;">Each set of two drawers calculated as 1.618 based on the lower drawer (includes rails)</p>
+                              <p>Arithmetic</p>
+                              <p style="font-size:0.8em;">Each drawer height is reduced by a fixed amount from the lower drawer</p>
+                              <p>Manual</p>
+                              <p style="font-size:0.8em;">Enter each drawer height individually</p>
+                              <p>Manual/Diff</p>
+                              <p style="font-size:0.8em;">Enter the difference between each drawer</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-center" id="">
+                      <div class="">
+                        <button id="useC1" onClick="useCanvas('C1')" type="button" class="btn btn-secondary my-4">Use</button>
+                        <button id="clearC1" onClick="clearCanvas('C1')" type="button" class="btn btn-outline-danger btn-sm my-4"><i class="fa fa-trash"></i></button>
+                      </div>
+                      <div class="text-center" id="canvasC1"
+                      data-Type="none"
+                      data-PPI="10"
+                      >
+                        <span id="cabinetC1" style="font-size:1.1em"></span><br/>
+                        <canvas id="C1" width="204" height="484" style="border:1px solid #d3d3d3;">
+                          Your browser does not support the HTML5 canvas tag.</canvas>
+                      </div>
+                    </div>
+                    <div class="col text-center" id="">
+                      <div class="">
+                        <button id="useC2" onClick="useCanvas('C2')" type="button" class="btn btn-secondary my-4">Use</button>
+                        <button id="clearC2" onClick="clearCanvas('C2')" type="button" class="btn btn-outline-danger btn-sm my-4"><i class="fa fa-trash"></i></button>
+                      </div>
+                      <div class="text-center" id="canvasC2"
+                      data-Type="none"
+                      data-PPI="10"
+                      >
+                        <span id="cabinetC2" style="font-size:1.1em"></span><br/>
+                        <canvas id="C2" width="204" height="484" style="border:1px solid #d3d3d3;">
+                          Your browser does not support the HTML5 canvas tag.</canvas>
+                      </div>
+                    </div>
+                    <div class="col text-center" id="">
+                      <div class="">
+                        <button id="useC3" onClick="useCanvas('C3')" type="button" class="btn btn-secondary my-4">Use</button>
+                        <button id="clearC3" onClick="clearCanvas('C3')" type="button" class="btn btn-outline-danger btn-sm my-4"><i class="fa fa-trash"></i></button>
+                      </div>
+                      <div class="text-center" id="canvasC3"
+                      data-Type="none"
+                      data-PPI="10"
+                      >
+                        <span id="cabinetC3" style="font-size:1.1em"></span><br/>
+                        <canvas id="C3" width="204" height="484" style="border:1px solid #d3d3d3;">
+                          Your browser does not support the HTML5 canvas tag.</canvas>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" style="font-size:1.2em; font-weight:400;">
+                    <div class="col text-left" id="">
+                      Drawer<br/>Fronts<br/>
+                      <span class="" id="tblC1"></span>
+                    </div>
+                    <div class="col text-left" id="">
+                      Drawer<br/>Fronts<br/>
+                      <span class="" id="tblC2"></span>
+                    </div>
+                    <div class="col text-left" id="">
+                      Drawer<br/>Fronts<br/>
+                      <span class="" id="tblC3"></span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center justify-content-md-between">
+        <div class="col-md-4">
+          <div class="copyright">
+            &copy; 2019
+            <a href="https://www.cutlist.com" target="_blank">Cutlist</a>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <ul class="nav nav-footer justify-content-end">
+            <li class="nav-item">
+              <a href="https://getbootstrap.com/" class="nav-link" target="_blank">Framework By Bootstrap</a>
+            </li>
+            <li class="nav-item">
+              <!-- <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a> -->
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Argon By Creative Tim</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Core -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/popper/popper.min.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/vendor/headroom/headroom.min.js"></script>
+  <!-- Argon JS -->
+  <script src="assets/js/argon.js?v=1.0.1"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      useCanvas($("#core_page").attr("data-Target"));
+    });
+  </script>
+  <script type="text/javascript">
+    function validateVal(tar,min=0,max=10) {
+      var v=$("#"+tar).val();
+      if (isNaN(v)) {
+        $("#"+tar).addClass("text-danger");
+        $("#help_"+tar).html("Must be "+min+" to "+max);
+      } else {
+        var n=parseFloat(v);
+        if ((n>max) || (n<min)) {
+          $("#"+tar).addClass("text-danger");
+          $("#help_"+tar).html("Must be "+min+" to "+max);
+        } else {
+          $("#"+tar).removeClass("text-danger");
+          $("#help_"+tar).html("");
+        }
+      }
+    }
+  </script>
+  <script type="text/javascript">
+    $("#ratiodecrease").change(function(){validateVal("ratiodecrease",0,2);});
+    $("#drawerwidth").change(function(){validateVal("drawerwidth",10,60);});
+    $("#stepdecrease").change(function(){validateVal("stepdecrease",0,30);});
+    $("#drawercount").change(function(){validateVal("drawercount",2,20);});
+    $("#ratiodecrease").change(function(){validateVal("ratiodecrease",0,2);});
+    $("#base").change(function(){validateVal("base",2,50);});
+  </script>
+  <script type="text/javascript">
+  function useCanvas(tar) {
+    console.log("useCanvas:"+tar);
+    var calc='no';
+    var current=$("#canvas"+tar).attr("data-Type");
+    if (current=='none') {
+      var ok='no';
+      var type=$("#core_page").attr("data-Type");
+      var title='Use';
+      switch (type) {
+        case 'hambridge':title='Hambridge';ok='yes';break;
+        case 'hambridgeModified':title='H Modified';ok='yes';break;
+        case 'geometric':title='Geometric';ok='yes';break;
+        case 'phi':title='Fibonacci/Phi';ok='yes';break;
+        case 'arithmetic':title='Arithmetic';ok='yes';break;
+        case 'manual':title='Manual';ok='yes';break;
+        case 'manualDiff':title='Manual/Diff';ok='yes';break;
+      }
+      if (ok=='yes') {
+        $("#core_page").attr("data-Target",tar);
+        $("#useC1").removeClass("btn-primary").addClass("btn-secondary");
+        $("#useC2").removeClass("btn-primary").addClass("btn-secondary");
+        $("#useC3").removeClass("btn-primary").addClass("btn-secondary");
+        $("#use"+tar).removeClass("btn-secondary").addClass("btn-primary");
+        $("#use"+tar).html(title);
+        $("#canvas"+tar).attr("data-Type",type);
+        $("#canvas"+tar).attr("data-PPI","10");
+      }
+      doCalculations(type,tar,ppi);
+    } else {
+      var type=$("#canvas"+tar).attr("data-Type");
+      var ppi=$("#canvas"+tar).attr("data-PPI");
+      showType(type);
+      $("#useC1").removeClass("btn-primary").addClass("btn-secondary");
+      $("#useC2").removeClass("btn-primary").addClass("btn-secondary");
+      $("#useC3").removeClass("btn-primary").addClass("btn-secondary");
+      $("#use"+tar).removeClass("btn-secondary").addClass("btn-primary");
+      doCalculations(type,tar,ppi);
+    }
+  }
+  </script>
+  <script type="text/javascript">
+    function doCalculations(type,tar,ppi) {
+      switch (type) {
+        case 'hambridge':calcHambridge(tar,ppi);break;
+        case 'hambridgeModified':calcHambridgeModified(tar,ppi);break;
+        case 'geometric':calcGeometric(tar,ppi);break;
+        case 'phi':calcPhi(tar,ppi);break;
+        case 'arithmetic':calcArithmetic(tar,ppi);break;
+        case 'manual':calcManual(tar,ppi);break;
+        case 'manualDiff':calcManualDiff(tar,ppi);break;
+      }
+    }
+  </script>
+  <script type="text/javascript">
+    function setFraction(dec) {
+      var r="";
+      var d=parseFloat(dec);
+      var l=[0,0.0938,0.1563,0.2188,0.2813,0.3438,0.4063,0.4688,0.5313,0.5938,0.6563,0.7188,0.7813,0.8438,0.9063,0.9688];
+      var u=[0.0938,0.1563,0.2188,0.2813,0.3438,0.4063,0.4688,0.5313,0.5938,0.6563,0.7188,0.7813,0.8438,0.9063,0.9688,1.000];
+      var f=["1/16","1/8","3/16","1/4","5/16","3/8","7/16","1/2","9/16","5/8","11/16","3/4","13/16","7/8","15/16","1/1"];
+      var i=Math.trunc(d);
+      s=d-i;
+      var working=true;
+      var x=0;
+      while (working) {
+        if (s>l[x]) {
+          if (s<=u[x]) {
+            r="-"+f[x];
+            working=false;
+          }
+        }
+        x=x+1;
+        if (x>16) {working=false;}
+      }
+      return r;
+    }
+  </script>
+  <script type="text/javascript">
+  function clearCanvas(tar) {
+    console.log("clearCanvas:"+tar);
+    var ok='no';
+    var type=$("#core_page").attr("data-Type");
+    $("#core_page").attr("data-Target",tar);
+    $("#useC1").removeClass("btn-primary").addClass("btn-secondary");
+    $("#useC2").removeClass("btn-primary").addClass("btn-secondary");
+    $("#useC3").removeClass("btn-primary").addClass("btn-secondary");
+    $("#use"+tar).removeClass("btn-secondary").addClass("btn-primary");
+    $("#use"+tar).html('Use');
+    $("#canvas"+tar).attr("data-Type","none");
+    $("#canvas"+tar).attr("data-PPI","10");
+    var full_width=204;
+    var full_height=484;
+    var c = document.getElementById(tar);
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0, 0, full_width, full_height);
+    ctx.beginPath();
+  }
+  </script>
+  <script type="text/javascript">
+  function showType(tar) {
+    console.log("showType:"+tar);
+    $("#hambridgeInput").addClass("d-none");
+    $("#hambridgeModifiedInput").addClass("d-none");
+    $("#geometricInput").addClass("d-none");
+    $("#phiInput").addClass("d-none");
+    $("#arithmeticInput").addClass("d-none");
+    $("#manualInput").addClass("d-none");
+    $("#manualDiffInput").addClass("d-none");
+    $("#"+tar+"Input").removeClass("d-none");
+    $("#methodDD").html($("#s_"+tar).html());
+    $("#core_page").attr("data-Type",tar);
+  }
+  </script>
+  <script type="text/javascript">
+  function calcToHeight() {
+    console.log("calcToHeight:");
+    var toHeight=$("#core_page").attr("data-ToHeight");
+    switch (toHeight) {
+      case 'yes':
+        $("#core_page").attr("data-ToHeight",'no');
+        $("#toheight").removeClass("btn-primary").addClass("btn-secondary");
+        break;
+      case 'no':
+        $("#core_page").attr("data-ToHeight",'yes');
+        $("#toheight").removeClass("btn-secondary").addClass("btn-primary");
+        break;
+    }
+  }
+  </script>
+  <script type="text/javascript">
+    function drawRail(y,x,w,r,ctx) {
+      ctx.fillRect(y,x,w,r);
+      ctx.rect(y,x,w,r);
+      ctx.stroke();
+    }
+  </script>
+<script type="text/javascript">
+  function busy(state=null) {
+    // busy('busy');
+    // busy('done');
+    switch (state) {
+      case "busy":
+        $("#busyindicator").addClass("fa-spinner");
+        break;
+      default:
+        $("#busyindicator").removeClass("fa-spinner");
+    }
+  }
+</script>
+<script src="assets/js/calcHambridge.js"></script>
+<script src="assets/js/calcHambridgeModified.js"></script>
+<script src="assets/js/calcGeometric.js"></script>
+<script src="assets/js/calcPhi.js"></script>
+<script src="assets/js/calcArithmetic.js"></script>
+<script src="assets/js/calcManual.js"></script>
+<script src="assets/js/calcManualDiff.js"></script>
+</body>
+</html>
