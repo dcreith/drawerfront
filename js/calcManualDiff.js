@@ -93,9 +93,7 @@ function calcManualDiff(tar,ppi=10) {
       diff=parseFloat($("#d"+i).val());
       drawer=front-diff;
       front=drawer.toFixed(3);
-      console.log("diff:"+diff);
-      console.log("drawer:"+drawer);
-      console.log("front:"+front);
+      console.log("d:"+i+" diff:"+diff+" drawer:"+drawer+" front:"+front);
 
       if (bottom>0) {
         h=Math.round(front*ppi);
