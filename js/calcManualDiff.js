@@ -91,31 +91,32 @@ function calcManualDiff(tar,ppi=10) {
 
     for (var i = 1; i < 8; i++) {
       diff=parseFloat($("#d"+i).val());
-      drawer=front-diff;
-      front=drawer.toFixed(3);
-      console.log("d:"+i+" diff:"+diff+" drawer:"+drawer+" front:"+front);
+      if (!(isNaN(diff))) {
+        drawer=front-diff;
+        front=drawer.toFixed(3);
+        console.log("d:"+i+" diff:"+diff+" drawer:"+drawer+" front:"+front);
 
-      if (bottom>0) {
-        h=Math.round(front*ppi);
-        x=x-h;
-        ctx.rect(s_y,x,w_width,h);
-        ctx.stroke();
-        cabinet=+cabinet + +front;
+        if (bottom>0) {
+          h=Math.round(front*ppi);
+          x=x-h;
+          ctx.rect(s_y,x,w_width,h);
+          ctx.stroke();
+          cabinet=+cabinet + +front;
 
-        // print front size
-        y_text=Math.round(x+(h/2));
-        f=setFraction(front);
-        d=Math.trunc(front);
-        allFronts=$("#tbl"+tar).html();
-        $("#tbl"+tar).html("#"+i+": "+d+f+"<br>"+allFronts);
-        ctx.fillText(front+" ("+d+f+'")', s_text, y_text);
+          // print front size
+          y_text=Math.round(x+(h/2));
+          f=setFraction(front);
+          d=Math.trunc(front);
+          allFronts=$("#tbl"+tar).html();
+          $("#tbl"+tar).html("#"+i+": "+d+f+"<br>"+allFronts);
+          ctx.fillText(front+" ("+d+f+'")', s_text, y_text);
 
-        // calc & draw next rail
-        x=x-h_rail;
-        drawRail(s_y,x,w_width,h_rail,ctx);
-        cabinet=+cabinet + +rail;
+          // calc & draw next rail
+          x=x-h_rail;
+          drawRail(s_y,x,w_width,h_rail,ctx);
+          cabinet=+cabinet + +rail;
+        }  
       }
-
     }
   }
 
