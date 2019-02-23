@@ -3,7 +3,6 @@ calc manual progression
 */
 function totalSoFarDiff() {
   var sum=0;
-  if (parseFloat($("#d1").val())>0) {sum=sum+parseFloat($("#d1").val());}
   if (parseFloat($("#d2").val())>0) {sum=sum+parseFloat($("#d2").val());}
   if (parseFloat($("#d3").val())>0) {sum=sum+parseFloat($("#d3").val());}
   if (parseFloat($("#d4").val())>0) {sum=sum+parseFloat($("#d4").val());}
@@ -15,7 +14,6 @@ function totalSoFarDiff() {
 }
 function countSoFarDiff() {
   var cnt=0;
-  if (parseFloat($("#d1").val())>0) {cnt=cnt+1;}
   if (parseFloat($("#d2").val())>0) {cnt=cnt+1;}
   if (parseFloat($("#d3").val())>0) {cnt=cnt+1;}
   if (parseFloat($("#d4").val())>0) {cnt=cnt+1;}
@@ -91,7 +89,7 @@ function calcManualDiff(tar,ppi=10) {
     drawRail(s_y,x,w_width,h_rail,ctx);
     cabinet=+cabinet + +rail;
 
-    for (var i = 2; i < (d_count+1); i++) {
+    for (var i = 2; i < 9; i++) {
       diff=parseFloat($("#d"+i).val());
       drawer=front-diff;
       front=drawer.toFixed(3);
