@@ -89,7 +89,7 @@ function calcManualDiff(tar,ppi=10) {
     drawRail(s_y,x,w_width,h_rail,ctx);
     cabinet=+cabinet + +rail;
 
-    for (var i = 2; i < 9; i++) {
+    for (var i = 1; i < 8; i++) {
       diff=parseFloat($("#d"+i).val());
       drawer=front-diff;
       front=drawer.toFixed(3);
