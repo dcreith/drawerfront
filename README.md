@@ -3,6 +3,8 @@
 
 Calculates and draws drawer front heights based on basic inputs and several equations. Useful for comparing layouts to find the most pleasing sizing. Web app can be viewed at https://dcreith.github.io/drawerfront/.
 
+Values output assume inches and show to the nearest 1/16th. If you want to calculate in metric then use the decimal output and ignore the values in parenthesis.
+
 <h2>Calculations</h2>
 
 <h3>Hambridge</h3>
