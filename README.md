@@ -26,9 +26,10 @@ Enter each drawer height individually.
 
 Enter the difference between each drawer, empty values are ignored.
 
-
+<hr/>
 
 <h2>Screen</h2>
+
 
 
 <img src="screen_1.png"/>
