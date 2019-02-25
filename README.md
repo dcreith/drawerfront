@@ -23,5 +23,6 @@ Each drawer height is reduced by a fixed amount from the lower drawer.
 Enter each drawer height individually.
 
 <h3>Manual/Diff</h3>
+
 Enter the difference between each drawer, empty values are ignored.
 
