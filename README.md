@@ -1,12 +1,12 @@
 # drawerfront
 <h1>Drawer Front Calculator</h1>
 
-Calculates and draws drawer front heights based on different equations. Useful for comparing layouts to find the most pleasing sizing. Web app can be viewed at https://dcreith.github.io/drawerfront/.
+Calculates and draws drawer front heights based on basic inputs and several equations. Useful for comparing layouts to find the most pleasing sizing. Web app can be viewed at https://dcreith.github.io/drawerfront/.
 
 <h2>Calculations</h2>
 
 <h3>Hambridge</h3>
-The bottom drawer has a height of [(square root of 2) – 1] times thedrawer width.
+The bottom drawer has a height of [(square root of 2) – 1] times the drawer width.
 The second drawer from the bottom has a height of [(square root of 3) – (square root of 2)] times drawer width.
 The nth drawer has a height of [(square root of n+1) – (square root of n)] times drawer width.
 
