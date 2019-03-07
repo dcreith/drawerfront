@@ -28,6 +28,10 @@ Enter each drawer height individually.
 
 Enter the difference between each drawer, empty values are ignored.
 
+<h2>Scaling</h2>
+
+Image will scale to fit the space. To rescale clear the drawing and reselect the calculation method.
+
 <hr/>
 
 <h2>Screen</h2>
